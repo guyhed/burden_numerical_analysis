@@ -58,4 +58,4 @@ def main():
       print("F[{}][{}] = {}".format(j, j, F[j][j]))
 
 
-main()
+# main()
