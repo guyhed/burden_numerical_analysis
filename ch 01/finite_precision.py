@@ -58,6 +58,11 @@ class FinitePrecision:
         """Return the rounded value as a float."""
         return float(self._decimal)
 
+    @property
+    def decimal(self):
+        """Return the internal Decimal representation."""
+        return self._decimal
+
     def __repr__(self):
         return f"FinitePrecision({self.value}, precision={self.precision})"
 
@@ -146,6 +151,12 @@ class FinitePrecision:
     def __pow__(self, exponent):
         """Raise to a power."""
         result_value = self._decimal ** exponent
+        result = FinitePrecision(float(result_value), precision=self.precision)
+        return result
+
+    def __rpow__(self, base):
+        """Raise a base to this power (base ** self)."""
+        result_value = Decimal(str(base)) ** self._decimal
         result = FinitePrecision(float(result_value), precision=self.precision)
         return result
 
